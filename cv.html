@@ -1,75 +1,408 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="Marie Houmaire" content="width=device-width, initial-scale=1.0">
-    <title> CV </title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - Marie Houmaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #0f2a4a;
+    --blue-mid: #1a4a7a;
+    --blue-light: #2d7dd2;
+    --blue-pale: #e8f2fc;
+    --white: #ffffff;
+    --grey: #6b8aaa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--blue-dark);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--blue-dark);
+    color: var(--white);
+    padding: 48px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .name-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .name-block .subtitle {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .name-block .dispo {
+    font-size: 0.72rem;
+    color: var(--grey);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--blue-mid);
+  }
+
+  .sidebar-section h3 {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 14px;
+  }
+
+  .contact-item {
+    font-size: 0.78rem;
+    color: #a8c4e0;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .contact-item a { color: #a8c4e0; text-decoration: none; }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    background: var(--blue-mid);
+    color: #d0e8ff;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .lang-item span { font-size: 0.78rem; color: #a8c4e0; }
+  .lang-badge {
+    background: var(--blue-light);
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .interest-item {
+    font-size: 0.75rem;
+    color: #a8c4e0;
+    margin-bottom: 6px;
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .interest-item::before {
+    content: '♦';
+    position: absolute;
+    left: 0;
+    color: var(--blue-light);
+    font-size: 0.5rem;
+    top: 4px;
+  }
+
+  /* MAIN */
+  .main {
+    padding: 48px 40px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .section-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--blue-pale);
+  }
+
+  .entry {
+    margin-bottom: 22px;
+    padding-left: 16px;
+    border-left: 2px solid var(--blue-pale);
+    transition: border-color 0.2s;
+  }
+
+  .entry:hover { border-color: var(--blue-light); }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .entry-title {
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--blue-dark);
+  }
+
+  .entry-org {
+    font-size: 0.78rem;
+    color: var(--blue-light);
+    font-weight: 500;
+  }
+
+  .entry-date {
+    font-size: 0.68rem;
+    color: var(--grey);
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .entry-desc {
+    font-size: 0.78rem;
+    color: #4a6a8a;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  .badge-highlight {
+    display: inline-block;
+    background: var(--blue-pale);
+    color: var(--blue-mid);
+    font-size: 0.67rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+</style>
 </head>
 <body>
-    <div class="cv-container">
-        <aside class="sidebar">
-            <div class="profile-img"></div>
-            <h1>Marie Houmaire </h1>
-            <p class="job-title">Etudiante à l'Ecole des Mines Paris</p>
-            
-            <section class="contact">
-                <h3>Contact</h3>
-                <p>📧 marie.houmaire@etu.minesparis.psl.eu</p>
-                <p>📱 07 68 42 65 85</p>
-                <p>📍 Paris, France</p>
-            </section>
-            </section>
-        </aside>
-            <section>
-                <h2>Expériences</h2>
-                <div class="exp">
-                    <h3> Tutrice  - Alveus </h3>
-                    <span>Avr 2025 - Oct 2025 </span>
-                    <p> Organisation de stages scientifiques pour des groupes de 4 élèves </p>
-                    <p> Session hebdomadaires et suivi d'élèves de la 6e à la Terminale  </p>
+<div class="page">
 
-                </div>
-
-                <div class="exp">
-                    <h3> Stage Expérimental  - Laboratoire de Physique de l'ENS </h3>
-                    <span>Oct 2023 - Juin 2024 </span>
-                    <p> Programme UROP sous la direction de Emmanuel Baudin</p>
-                    <p> Etude de la propogation du son dans des cyclindres et dans des oeufs </p>
-
-                </div>
-
-                <div class="exp">
-                    <h3> Magasinière Saisonière - Bibliothèque Nationale de France </h3>
-                    <span>Juil 2023 - Août 2023 </span>
-                    <p>Rangement des collections</p>
-                    <p>Accueil du public </p>
-                </div>
-
-                <div class="exp">
-                    <h3> Adjointe Administrative - Agglomération Paris-Saclay </h3>
-                    <span>Oct 2022 et Avr 2022 </span>
-                    <p>Réalisation de devis</p>
-                    <p>Indexation de photosgraphies</p>
-
-                </div>
-
-                <div class="exp">
-                    <h3> Saisonière - Mairie de Cabourg </h3>
-                    <span>Juil 2022 - Août 2022 </span>
-                    <p>Entretien de la voirie</p>
-                </div>
-            </section>
-
-            <section>
-                <h2>Formation</h2>
-                <p><strong>2025 - 2029 - Cycle Ingénieur Civil</strong> - Ecole Nationale Supérieur des Mines Paris </p>
-                <p><strong>2022 - 2025 - Cycle Pluridisciplinaire d'Etude Supérieures - Sciences </strong> - PSL - Lycée Henri IV  </p>
-                <p><strong>2019 - 2020 - Baccalauréat - Lycée Blaise Pascal (Orsay)  </p>
-
-            </section>
-        </main>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="name-block">
+      <h1>Marie<br>Houmaire</h1>
+      <div class="subtitle">Étudiante · Mines Paris PSL</div>
+      <div class="dispo">Disponible du 4 au 29 mai 2025</div>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>Contact</h3>
+      <div class="contact-item">270 rue Saint Jacques<br>75005 Paris</div>
+      <div class="contact-item">07 68 42 65 85</div>
+      <div class="contact-item"><a href="mailto:marie.houmaire@etu.minesparis.psl.eu">marie.houmaire@<br>etu.minesparis.psl.eu</a></div>
+      <div class="contact-item" style="color:var(--grey)">Née le 21/06/2004</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>Langues</h3>
+      <div class="lang-item"><span>Anglais</span><span class="lang-badge">C1</span></div>
+      <div class="lang-item"><span>Espagnol</span><span class="lang-badge">B2</span></div>
+      <div class="lang-item"><span>Japonais</span><span class="lang-badge">en cours</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>Compétences</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Word</span>
+        <span class="tag">PowerPoint</span>
+        <span class="tag">Montage vidéo</span>
+        <span class="tag">Permis B</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>Centres d'intérêt</h3>
+      <div class="interest-item">Musique — violon, flûte, piano, orchestre symphonique (DEM)</div>
+      <div class="interest-item">Danse contemporaine — 13 ans à l'École des Arts de Marcoussis</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- FORMATION -->
+    <section>
+      <div class="section-title">Formation</div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Cycle Ingénieur</div>
+            <div class="entry-org">École des Mines Paris PSL</div>
+          </div>
+          <div class="entry-date">2025 – 2028</div>
+        </div>
+        <div class="entry-desc">Japonais · Projet Machine Learning à Sophia Antipolis</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">CPES – Majeure Mathématiques Physique</div>
+            <div class="entry-org">Lycée Henri IV, PSL, Paris</div>
+          </div>
+          <div class="entry-date">2022 – 2025</div>
+        </div>
+        <div class="entry-desc">Cursus Sciences · options : Histoire, Macroéconomie, Espagnol avancé</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Bac Général TB – Félicitations du jury</div>
+            <div class="entry-org">Lycée Blaise Pascal, Orsay</div>
+          </div>
+          <div class="entry-date">2022</div>
+        </div>
+        <div class="entry-desc">Spécialités : Maths, Physique-Chimie, HGGSP · Section européenne espagnol</div>
+        <span class="badge-highlight">3e prix national TFJM2 2022</span>
+      </div>
+    </section>
+
+    <!-- EXPÉRIENCES -->
+    <section>
+      <div class="section-title">Expériences</div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Tutrice</div>
+            <div class="entry-org">Alveus</div>
+          </div>
+          <div class="entry-date">Depuis avr. 2025</div>
+        </div>
+        <div class="entry-desc">Organisation de stages scientifiques · suivi d'élèves de la 6e à la Terminale</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Stage Expérimental</div>
+            <div class="entry-org">Laboratoire de Physique de l'ENS</div>
+          </div>
+          <div class="entry-date">Oct. 2023 – Juin 2024</div>
+        </div>
+        <div class="entry-desc">Programme UROP PSL · French Physicists Tournament (équipe ENS Ulm) · étude de la propagation du son dans les cylindres et les œufs</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Magasinière Saisonnière</div>
+            <div class="entry-org">Bibliothèque Nationale de France</div>
+          </div>
+          <div class="entry-date">Juil. – Août 2023</div>
+        </div>
+        <div class="entry-desc">Accueil du public · rangement des collections</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Adjointe administrative – Communication</div>
+            <div class="entry-org">Agglomération Paris-Saclay</div>
+          </div>
+          <div class="entry-date">Oct. & Avr. 2022</div>
+        </div>
+        <div class="entry-desc">Indexation photographique · réalisation de devis évènementiels</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Workcamp International</div>
+            <div class="entry-org">Ecumenical Youth Services – Allemagne</div>
+          </div>
+          <div class="entry-date">Août 2021 & 2024</div>
+        </div>
+        <div class="entry-desc">Entretien des espaces verts · travaux de rénovation</div>
+      </div>
+    </section>
+
+    <!-- ENGAGEMENT -->
+    <section>
+      <div class="section-title">Engagement</div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Tutorat PSL</div>
+            <div class="entry-org">Mathématiques & Physique – CPES</div>
+          </div>
+          <div class="entry-date">2023 – 2025</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">Conseillère Régionale Jeune d'Île-de-France</div>
+            <div class="entry-org">Commissions SDRIF-e & Écologie</div>
+          </div>
+          <div class="entry-date">2022 – 2025</div>
+        </div>
+        <div class="entry-desc">Réunions plénières · rédaction de rapports</div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
 </body>
 </html>
